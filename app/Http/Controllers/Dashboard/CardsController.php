@@ -19,27 +19,7 @@ class CardsController extends Controller
 {
     public function index(Request $request)
     {
-    //  $allorders=Cards::where('id',1)->update(array('avaliable'=>1));
-       // $cards=Cards::all();
-       // $allorders=Order::all()->unique('card_id');
-        //dd($allorders);
-        /*if(!empty($allorders)){
-         foreach($allorders as $row){
-             
-             $is_expired = $row->created_at->addMinutes(10);
-             if($is_expired < \Carbon\Carbon::now()){
-
-
-         Cards::where('id',$row->card_id)->update(array('avaliable'=>0));
-               
-          
-             }
-         }
-        }*/
-        //dd($cards);
-       /* $allorders=Order::orderBy('id','desc')->get()->unique('card_id');
-      //  $allorders=Order::where(array('card_id'=>3751))->orderBy('id','desc')->distinct('card_id')->groupBy('card_id')->get();
-return($allorders);*/
+  
 
         $Cards = Cards::where(array('enable'=>0))->when($request->search, function ($q) use ($request) {
 
@@ -303,8 +283,17 @@ return($allorders);*/
 
     public function cmpanies($id)
     {
-        $cities = DB::table("companies")
+        $cities = DB::table("main_companies")
                     ->where("kind",$id)
+                    ->get();
+        return json_encode($cities);
+    }
+
+    
+    public function maincompcard($id)
+    {
+        $cities = DB::table("companies")
+                    ->where("main_company_id",$id)
                     ->get();
         return json_encode($cities);
     }

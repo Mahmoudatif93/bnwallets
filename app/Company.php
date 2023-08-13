@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    protected $fillable = ['name', 'company_image','kind','api','enable','api2','idapi2','AcountID','AcountEmail','AcountPassword'];
+    protected $fillable = ['main_company_id','name', 'company_image','kind','api','enable','api2','idapi2','AcountID','AcountEmail','AcountPassword'];
 
 
     public function cards()
@@ -14,5 +14,18 @@ class Company extends Model
         return $this->hasMany(Cards::class);
 
     }//end of Cards
+    
+        public function Cobon()
+    {
+        return $this->hasMany(Cobon::class);
+
+    }//end of Cobon
+
+    public function MainCompany()
+    {
+        return $this->belongsTo(MainCompany::class);
+
+    }//end of MainCompany
+
     
 }

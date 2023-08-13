@@ -7,6 +7,7 @@ return [
         'to' => '  الي تاريخ',
     'add' => 'اضف',
     'Paymentcommissions'=>'عمولات الدفع',
+    'MainCompanies'=>'الشركات الرئيسيه',
     'create' => 'اضافه',
     'read' => 'عرض',
     'edit' => 'تعديل',

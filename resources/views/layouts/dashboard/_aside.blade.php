@@ -41,6 +41,7 @@
         <?php $routname=\Request::route()->getName();
             $activedas='';
             $activecomp='';
+            $activeMaincomp='';
             $activecard='';
             $activeuser='';
  if(str_ireplace(".index","",$routname) == "dashboard") {$activedas='active';}
@@ -50,7 +51,10 @@ else if($routname== 'dashboard.Cards.index') {$activecard='active';
 }
 else if($routname== 'dashboard.users.index') {$activeuser='active';
 }
- else{$activedas='';$activecomp=''; $activecard='';$activeuser='';}?>
+else if($routname== 'dashboard.MainCompanies.index') {$activeMaincomp='active';
+}
+
+ else{$activedas='';$activecomp=''; $activecard='';$activeuser='';$activeMaincomp='';}?>
 
            <li class="slide nav-item <?= $activedas;?>"><a  href="{{ route('dashboard.index') }}" data-toggle="slide"><i class="fa fa-th"></i><span 
            class="side-menu__label ">@lang('site.dashboard') 
@@ -58,6 +62,10 @@ else if($routname== 'dashboard.users.index') {$activeuser='active';
           
         </span></a></li>
 
+
+        @if (auth()->user()->hasPermission('read_MainCompanies'))
+                <li class="slide nav-item <?= $activeMaincomp;?>"><a href="{{ route('dashboard.MainCompanies.index') }}" data-toggle="slide"><i class="fa fa-th"></i><span class="side-menu__label">@lang('site.MainCompanies')</span></a></li>
+            @endif
 
             @if (auth()->user()->hasPermission('read_Companies'))
                 <li class="slide nav-item <?= $activecomp;?>"><a href="{{ route('dashboard.Companies.index') }}" data-toggle="slide"><i class="fa fa-th"></i><span class="side-menu__label">@lang('site.Companies')</span></a></li>

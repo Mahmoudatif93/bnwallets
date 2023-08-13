@@ -6,11 +6,11 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.Companies')</h1>
+            <h1>@lang('site.MainCompanies')</h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                <li class="active">@lang('site.Companies')</li>
+                <li class="active">@lang('site.MainCompanies')</li>
             </ol>
         </section>
 
@@ -24,9 +24,9 @@
 
                 <div class="box-header with-border">
 
-                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.Companies') <small>{{ $Companies->total() }}</small></h3>
+                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.MainCompanies') <small>{{ $Companies->total() }}</small></h3>
 
-                    <form action="{{ route('dashboard.Companies.index') }}" method="get">
+                    <form action="{{ route('dashboard.MainCompanies.index') }}" method="get">
 
                         <div class="row">
 
@@ -37,7 +37,7 @@
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
                                 @if (auth()->user()->hasPermission('create_Companies'))
-                                    <a href="{{ route('dashboard.Companies.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                    <a href="{{ route('dashboard.MainCompanies.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                 @else
                                     <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                 @endif
@@ -57,12 +57,10 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>@lang('site.MainCompanies')</th>
                                 <th>@lang('site.name')</th>
                                 <th>@lang('site.kind')</th>
                                 <th>@lang('site.image')</th>
-                            <th>Acount ID</th>
-                            <th>Acount Email</th>
+                       
                           
                                 <th>@lang('site.action')</th>
                             </tr>
@@ -72,7 +70,6 @@
                             @foreach ($Companies as $index=>$category)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $category->MainCompany->name }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>
                                     @if($category->kind=="local")
@@ -87,19 +84,18 @@
                                 
 
                                 </td>
- <td>{{ $category->AcountID }}</td>
-  <td>{{ $category->AcountEmail }}</td>
+
 
 
                                                                    <td>
                                         @if (auth()->user()->hasPermission('update_Companies'))
-                                            <a href="{{ route('dashboard.Companies.edit', $category->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                            <a href="{{ route('dashboard.MainCompanies.edit', $category->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                         @else
                                             <a href="#" class="btn btn-info btn-sm disabled"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                         @endif
                                       
                                       {{--  @if (auth()->user()->hasPermission('delete_Companies'))
-                                            <form action="{{ route('dashboard.Companies.destroy', $category->id) }}" method="post" style="display: inline-block">
+                                            <form action="{{ route('dashboard.MainCompanies.destroy', $category->id) }}" method="post" style="display: inline-block">
                                                 {{ csrf_field() }}
                                                 {{ method_field('delete') }}
                                                 <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>

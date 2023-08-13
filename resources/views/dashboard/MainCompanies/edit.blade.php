@@ -6,11 +6,11 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.Companies')</h1>
+            <h1>@lang('site.MainCompanies')</h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                <li><a href="{{ route('dashboard.Companies.index') }}"> @lang('site.Companies')</a></li>
+                <li><a href="{{ route('dashboard.MainCompanies.index') }}"> @lang('site.MainCompanies')</a></li>
                 <li class="active">@lang('site.edit')</li>
             </ol>
         </section>
@@ -27,21 +27,29 @@
 
                     @include('partials._errors')
 
-                    <form action="{{ route('dashboard.Companies.update', $category->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.MainCompanies.update', $category->id) }}" method="post" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
                         {{ method_field('put') }}
 
-                 
+                        <div class="form-group">
+                            <label>@lang('site.kind')</label>
+                            <select name="kind" class="form-control">
+                                <option value="">@lang('site.kind')</option>
+                                @if($category->kind=="local")
+                            <option value="local" selected>@lang('site.local')</option>
+                            <option value="national">@lang('site.national')</option>
+                            @elseif($category->kind=="national")
+                            <option value="local" >@lang('site.local')</option>
+                            <option value="national"selected>@lang('site.national')</option>
+                            @else
+                            <option value="local" >@lang('site.local')</option>
+                            <option value="national">@lang('site.national')</option>
+                            @endif
+                               
+                            </select>
+                        </div>
 
-                        <div class="form-group col-6"> <label>@lang('site.MainCompanies')</label>
-                        <select name="main_company_id" id="main_company_id" class="form-control">
-                            <option value="">@lang('site.MainCompanies')</option>
-                            @foreach($mcategory as $MCompanie)
-                            <option value="{{$MCompanie->id}}" {{ $category->main_company_id == $MCompanie->id ? 'selected' : '' }}>{{$MCompanie->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                             <div class="form-group">
                                 <label>@lang('site.name')</label>
@@ -60,25 +68,6 @@
                         </div>
                         
                         
-                        
-                         <div class="form-group">
-                                <label>Acount ID</label>
-                                <input type="text" name="AcountID" class="form-control" value="{{ $category->AcountID }}">
-                            </div>
-                            
-                            
-                                <div class="form-group">
-                                <label>Acount Email</label>
-                                <input type="text" name="AcountEmail" class="form-control" value="{{ $category->AcountEmail }}">
-                            </div>
-                            
-                            
-                                <div class="form-group">
-                                <label>Acount Password</label>
-                                <input type="password" name="AcountPassword" class="form-control" placeholder="******">
-                            </div>
-
-
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.edit')</button>

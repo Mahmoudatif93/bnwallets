@@ -16,14 +16,13 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
-            
+            $table->integer('enable')->default(0);
+            $table->integer('purchase')->default(0);
             $table->string('card_name')->default(0);
             $table->double('card_price')->default(0);
             $table->string('card_code')->default(0);
-
             $table->integer('avaliable')->default(0);
             $table->string('nationalcompany')->default('local');
-            
             $table->string('card_image')->default('default.png');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->timestamps();

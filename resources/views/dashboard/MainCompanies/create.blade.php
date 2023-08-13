@@ -4,11 +4,11 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>@lang('site.Companies')</h1>
+            <h1>@lang('site.MainCompanies')</h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                <li><a href="{{ route('dashboard.Companies.index') }}"> @lang('site.Companies')</a></li>
+                <li><a href="{{ route('dashboard.MainCompanies.index') }}"> @lang('site.MainCompanies')</a></li>
                 <li class="active">@lang('site.add')</li>
             </ol>
         </section>
@@ -24,17 +24,17 @@
 
                     @include('partials._errors')
 
-                    <form action="{{ route('dashboard.Companies.store') }}" method="post"  enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.MainCompanies.store') }}" method="post"  enctype="multipart/form-data">
 
                         {{ csrf_field() }}
                         {{ method_field('post') }}
 
-                        <div class="form-group col-6"> <label>@lang('site.MainCompanies')</label>
-                        <select name="main_company_id" id="main_company_id" class="form-control">
-                            <option value="">@lang('site.MainCompanies')</option>
-                            @foreach($MCompanies as $MCompanie)
-                            <option value="{{$MCompanie->id}}">{{$MCompanie->name}}</option>
-                            @endforeach
+                        <div class="form-group col-6"> <label>@lang('site.kind')</label>
+                        <select name="kind" id="kind" class="form-control">
+                            <option value="">@lang('site.kind')</option>
+                            <option value="local">@lang('site.local')</option>
+                            <option value="national">@lang('site.national')</option>
+                            
                         </select>
                     </div>
 
@@ -49,22 +49,7 @@
                                 <input type="file" name="company_image" class="form-control" value="{{ old( 'company_image') }}">
                             </div>
                             
-                                <div class="form-group">
-                                <label>Acount ID</label>
-                                <input type="text" name="AcountID" class="form-control" value="{{ old('AcountID') }}">
-                            </div>
-                            
-                            
-                                <div class="form-group">
-                                <label>Acount Email</label>
-                                <input type="text" name="AcountEmail" class="form-control" value="{{ old('AcountEmail') }}">
-                            </div>
-                            
-                            
-                                <div class="form-group">
-                                <label>Acount Password</label>
-                                <input type="password" name="AcountPassword" class="form-control" placeholder="******">
-                            </div>
+                          
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
                         </div>

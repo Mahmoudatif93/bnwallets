@@ -10,6 +10,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             //Companies routes
             Route::resource('Companies', 'CompanyController')->except(['show']);
 
+              //MainCompanies routes
+              Route::resource('MainCompanies', 'MainCompanyController')->except(['show']);
    //products routes
             Route::resource('products', 'ProductsController')->except(['show']);
                  Route::resource('productsorders', 'ProductsOrdersController')->except(['show']);
@@ -23,6 +25,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::get('notoffer/{id}', 'CardsController@notoffer')->name('notoffer');
             Route::post('importcard', 'CardsController@import')->name('importcard');
             Route::any('Cards/compcard/{id}','CardsController@cmpanies')->name('Cards/compcard');
+            Route::any('Cards/maincompcard/{id}','CardsController@maincompcard')->name('Cards/maincompcard');
 
 
             //client routes

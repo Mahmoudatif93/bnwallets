@@ -15,6 +15,7 @@ return [
         'super_admin' => [
             'users' => 'c,r,u,d',
             'Companies' => 'c,r,u,d',
+            'MainCompanies'=>'c,r,u,d',
             'Cards' => 'c,r,u,d',
             'clients' => 'c,r,u,d',
             'orders' => 'c,r,u,d',

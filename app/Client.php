@@ -36,4 +36,14 @@ class Client extends Authenticatable implements JWTSubject
     
 
 
+  public function Packagesorder()
+    {
+        return $this->hasMany(Packages_orders::class,'client_id','id')->with('Packages');
+
+    }//end of orders
+    
+    
+    
+    
+
 }//end of model

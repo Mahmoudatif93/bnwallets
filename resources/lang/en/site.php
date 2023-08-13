@@ -8,6 +8,7 @@ return [
         'in' => 'From Date',
         'to' => 'To Date',
     'create' => 'Create',
+    'MainCompanies'=>'Main Companies',
     'read' => 'Read',
     'paid'=>'paid',
     'card_name'=>'Card Name',

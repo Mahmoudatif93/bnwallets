@@ -7,6 +7,7 @@ use App\Cards;
 use App\Anaiscodes;
 use App\cards_anais;
 use App\Order;
+use App\MainCompany;
 use App\Client;
 use App\Order_anais;
 use Illuminate\Http\Request;
@@ -63,31 +64,25 @@ class CompanyController extends Controller
     {
 
         ini_set("prce.backtrack_limit", "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-
-
-
-
-
-
-        $Companies = Company::where('enable', 0)->when($request->search, function ($q) use ($request) {
-
+        $Companies = Company::with('MainCompany')->where('enable', 0)->when($request->search, function ($q) use ($request) {
             return $q->where('name', 'like', '%' .  $request->search . '%')
                 ->orWhere('kind', 'like', '%' . $request->search . '%');
         })->latest()->paginate(5);
-
         return view('dashboard.Companies.index', compact('Companies'));
     } //end of index
 
     public function create()
     {
-        return view('dashboard.Companies.create');
+        $MCompanies = MainCompany::where('enable',0)->get();
+    
+        return view('dashboard.Companies.create', compact('MCompanies'));
     } //end of create
 
     public function store(Request $request)
     {
         $rules = [
             'name' => 'required',
-            'kind' => 'required',
+            'main_company_id' => 'required',
         ];
 
         $request->validate($rules);
@@ -95,14 +90,7 @@ class CompanyController extends Controller
        if ($request->company_image) {
 //dd(public_path('uploads/company/' . $nassme));
 
-          $dd= /*  Image::make($request->file('company_image'))
-               /* ->resize(100, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })*/
-              
-               // $request->file('company_image')->save(public_path('uploads/company/' . $nassme));
- 
-           // $request_data['company_image'] = 'https://bn-plus.ly/BNplus/public/uploads/company/' . $nassme;
+          $dd= 
             
                Image::make($request->company_image)
                     ->resize(300, null, function ($constraint) {
@@ -123,7 +111,8 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $category = Company::where('id', $id)->first();
-        return view('dashboard.Companies.edit', compact('category'));
+        $mcategory = MainCompany::where('enable', 0)->get();
+        return view('dashboard.Companies.edit', compact('category','mcategory'));
     } //end of edit
 
     public function update(Request $request, $id)

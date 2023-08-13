@@ -50,16 +50,17 @@
                         </select>
                     </div>
 
+                    <div class="form-group col-6"> <label>@lang('site.MainCompanies')</label>
+                        <select name="main_company_id" id="MainCompanies" class="form-control">
+                        <option value="">@lang('site.MainCompanies')</option>
 
-                    {{-- <div class="form-group col-6"> <label>@lang('site.Companies')</label>
-                        <select name="company_id" id="company_id" class="form-control">
-                            <option value="">@lang('site.Companies')</option>
-                            @foreach ($Companies as $row)
-                            <option value="{{ $row->id }}" {{ old('company_id') == $row->id ? 'selected' : '' }}>{{ $row->name }}</option>
-                    @endforeach
-                    </select>
-            </div>--}}
 
+                        </select>
+                    </div>
+
+
+
+              
             <div class="form-group col-6" id="companies"> <label>@lang('site.Companies')</label>
                 <select name="company_id" id="company_id" class="form-control">
                     <option value="">@lang('site.Companies')</option>
@@ -238,6 +239,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
         $('select[name="kind"]').on('change', function() {
             var kind = $(this).val();
             if (kind) {
@@ -246,33 +248,51 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-
-
-                        $('select[name="company_id"]').empty();
+                        $('select[name="MainCompanies"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="company_id"]').append('<option value="' + value['id'] + '">' + value['name'] + '</option>');
-
-
+                            $('select[name="MainCompanies"]').append('<option value="' + value['id'] + '">' + value['name'] + '</option>');
                         });
                         if (kind == "national") {
                             document.getElementById("nationalcheck").style.display = "block";
-                            
-                            
-
                         } else {
                             document.getElementById("nationalcheck").style.display = "none";
-                          
-
-
                         }
 
                     }
                 });
             } else {
-                $('select[name="company_id"]').empty();
+                $('select[name="MainCompanies"]').empty();
             }
         });
     });
+
+
+    //////////////////////
+
+
+    $(document).ready(function() {
+
+$('select[name="MainCompanies"]').on('change', function() {
+    var kind = $(this).val();
+    if (kind) {
+        $.ajax({
+            url: 'maincompcard/' + kind,
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                $('select[name="company_id"]').empty();
+                $.each(data, function(key, value) {
+                    $('select[name="company_id"]').append('<option value="' + value['id'] + '">' + value['name'] + '</option>');
+                });
+              
+
+            }
+        });
+    } else {
+        $('select[name="company_id"]').empty();
+    }
+});
+});
 </script>
 
 
