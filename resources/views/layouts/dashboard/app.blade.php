@@ -101,8 +101,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard_files/plugins/icheck/all.css') }}">
 
     {{--html in  ie--}}
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -212,6 +211,8 @@
 </div><!-- end of wrapper -->
 
 {{--<!-- Bootstrap 3.3.7 -->--}}
+
+
 <script src="{{ asset('dashboard_files/js/bootstrap.min.js') }}"></script>
 
 {{--icheck--}}
